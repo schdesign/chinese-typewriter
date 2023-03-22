@@ -3,11 +3,36 @@
 
 #include "chinesetypewriter.h"
 #include <QFileDialog>
+#include <QFont>
 #include <QMessageBox>
 
 ChineseTypewriter::ChineseTypewriter(QWidget *parent) : QMainWindow(parent)
 {
     setupUi(this);
+
+    QString buttonsText = QString::fromUtf8(
+            "⼗⼚ナ⼕⼐⺅⼈⼋丷⼉⼏⼇⼍⼙⺋⼑⺉⼌⼘⼓⺇⼎⺈⻈⾔⼒⼜⼛⼵⻏"
+            "⻖.⼟⺘⼿龵⼨⺐⼤⼝⺦⼭⼯⺾⼶⼩⼞⼱⼺⼢⼻⽝⺨⻠⾷⻔⺖⼼⺗⻌"
+            "⼫⼸⼴⺡⽔⼧⼣⺕⼦孑⻢.⼥⺰⽷⺯.⺍⺌龸⽊⽇⻉⻅⺙⽁⽉⽍⼽⻋"
+            "⽌⽈⺜⽜牜⽖⺤⽎.⽕⺣⽰⺭⽋⽅⼾⽃⽄⽚⽐⽗⺧⽓⽑⻛⽛⽯⽥⻐⾦"
+            "⽩⽧⽳龹⽬⽫⽲⻦⽴⻂⾐⽪⽨⺢戊⽮⺫王⽟⽢⽠⽾⻚⺮⽶⽿⾍⾈⽺⺶"
+            "⺷⽻⻄⻃⾌⽸⾆.⾄⾛⾜⻊⾘⾝⾣.⾟⾖⻗⻥⻣⿊⾫⻘⾰⻤⿇⿐");
+
+    QFont buttonFont("Sans", 20);
+
+    for (int i = 0; i < hanziParts; i++) {
+        int j = i / 30;
+        QString buttonName = QString::fromUtf8("button") + QString::number(i);
+        QString buttonText;
+        if (i < buttonsText.size())
+            if (QString(buttonsText[i]) != QString::fromUtf8("."))
+                buttonText = QString(buttonsText[i]);
+        toolButtons[i] = new QToolButton(centralwidget);
+        toolButtons[i]->setObjectName(buttonName);
+        toolButtons[i]->setGeometry(QRect(40 + 40 * (i % 30), 490 + 40 * j, 32, 32));
+        toolButtons[i]->setFont(buttonFont);
+        toolButtons[i]->setText(buttonText);
+    }
 
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(about()));
     connect(actionCloseFile, SIGNAL(triggered()), this, SLOT(closeFile()));

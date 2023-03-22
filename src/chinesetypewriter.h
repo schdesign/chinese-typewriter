@@ -13,6 +13,8 @@ class ChineseTypewriter : public QMainWindow, private Ui::ChineseTypewriter
 
 public:
     explicit ChineseTypewriter(QWidget *parent = nullptr);
+    static constexpr int hanziParts = 240;
+    QToolButton *toolButtons[hanziParts];
 
 private slots:
     void about();
