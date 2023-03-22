@@ -7,12 +7,20 @@
 #include "ui_chinesetypewriter.h"
 #include <QMainWindow>
 
-class ChineseTypeWriter : public QMainWindow, private Ui::ChineseTypeWriter
+class ChineseTypewriter : public QMainWindow, private Ui::ChineseTypewriter
 {
     Q_OBJECT
 
 public:
-    explicit ChineseTypeWriter(QWidget *parent = nullptr);
+    explicit ChineseTypewriter(QWidget *parent = nullptr);
+
+private slots:
+    void about();
+    void closeFile();
+    void newFile();
+    void openFile();
+    void quit();
+    void saveFile();
 };
 
 #endif  // CHINESETYPEWRITER_H
